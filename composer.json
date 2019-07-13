@@ -9,7 +9,7 @@
             "email": "payam.yasaie@outlook.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "repositories": [
         {
             "type": "github",
