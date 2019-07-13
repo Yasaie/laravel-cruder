@@ -1,0 +1,27 @@
+{
+    "name": "yasaie/laravel-cruder",
+    "description": "Admin panel crud maker",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Payam Yasaie",
+            "email": "payam.yasaie@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "github",
+            "url": "git@github.com:Yasaie/laravel-helper.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Yasaie\\Cruder\\": "src/"
+        }
+    },
+    "require": {
+        "yasaie/laravel-helper": "dev-master"
+    }
+}
