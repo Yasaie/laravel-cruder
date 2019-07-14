@@ -62,4 +62,19 @@ class Crud
         return view('admin.crud.show')
             ->with(compact('item', 'heads'));
     }
+
+    /**
+     * @package create
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     * @param $inputs
+     * @param null $multilang
+     *
+     * @return mixed
+     */
+    public static function create($inputs, $multilang = null)
+    {
+        return view('admin.crud.create')
+            ->with(compact('inputs', 'multilang'));
+    }
 }
