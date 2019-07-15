@@ -9,18 +9,23 @@
             "email": "payam.yasaie@outlook.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "github",
-            "url": "git@github.com:Yasaie/laravel-helper.git"
-        }
-    ],
+    "require": {
+        "yasaie/laravel-helper": "dev-master",
+        "yasaie/laravel-paginate": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "Yasaie\\Cruder\\": "src/"
         }
     },
-    "require": {
-        "yasaie/laravel-helper": "dev-master"
-    }
+    "repositories": [
+        {
+            "type": "github",
+            "url": "git@github.com:Yasaie/laravel-helper.git"
+        },
+        {
+            "type": "github",
+            "url": "git@github.com:Yasaie/laravel-paginate.git"
+        }
+    ]
 }

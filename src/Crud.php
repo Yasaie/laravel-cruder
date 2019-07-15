@@ -8,6 +8,7 @@
 namespace Yasaie\Cruder;
 
 use Yasaie\Helper\Y;
+use Yasaie\Paginate\Helper;
 
 class Crud
 {
@@ -42,7 +43,7 @@ class Crud
         # Sort and desc/asc items
         $items = $items->sortBy($sort, SORT_NATURAL, $desc);
         # Paginate items
-        $pages = Y::paginate($items, $request->page, $perPage);
+        $pages = Helper::paginate($items, $request->page, $perPage);
 
         return view('admin.crud.table')
             ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
