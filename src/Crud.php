@@ -18,14 +18,15 @@ class Crud
      *
      * @param $items
      * @param $heads
-     * @param $request
      * @param $sort_by
      * @param $perPage
      *
      * @return mixed
      */
-    public static function index($items, $heads, $request, $sort_by, $perPage)
+    public static function index($items, $heads, $sort_by, $perPage)
     {
+        # get all requests
+        $request = request();
         # Url query requested
         $query = [
             'search' => $request->search,
