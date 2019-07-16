@@ -36,11 +36,12 @@ class Crud
 
         # Custom fields
         $search = $request->search;
+        $column = $request->column;
         $sort = $request->sort ?: $sort_by;
         $desc = $request->desc ? 1 : 0;
 
         # flatten and Search in model if search requested
-        $items = Y::flattenItems($items, $heads, $search);
+        $items = Y::flattenItems($items, $heads, $search, $column);
         # Sort and desc/asc items
         $items = $items->sortBy($sort, SORT_NATURAL, $desc);
         # Paginate items
