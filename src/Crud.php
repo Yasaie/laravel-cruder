@@ -112,6 +112,8 @@ class Crud
      *
      * @param $item
      * @param null $model
+     *
+     * @return mixed
      */
     static public function destroy($item, $model = null)
     {
@@ -119,6 +121,6 @@ class Crud
             $item = $model::find($item);
         }
 
-        $item->delete();
+        return $item->delete();
     }
 }
