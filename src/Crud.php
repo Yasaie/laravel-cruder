@@ -121,6 +121,8 @@ class Crud
             $item = $model::find($item);
         }
 
-        return $item->delete();
+        return [
+            'result' => $item->delete()
+        ];
     }
 }
