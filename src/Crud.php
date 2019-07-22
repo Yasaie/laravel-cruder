@@ -98,18 +98,21 @@ class Crud
      * @param $inputs
      * @param null $multilang
      * @param null $form_action
+     * @param null $form_id
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    static public function create($inputs, $multilang = null, $form_action = null)
+    static public function create($inputs, $multilang = null, $form_action = null, $form_id = null)
     {
         if (!$form_action) {
             $form_action = \Request::route()->parameters
                 ? 'update' : 'index';
         }
 
+        $form_id = $form_id ?: current(\Request::route()->parameters);
+
         return view('admin.crud.create')
-            ->with(compact('inputs', 'multilang', 'form_action'));
+            ->with(compact('inputs', 'multilang', 'form_action', 'form_id'));
     }
 
     /**
