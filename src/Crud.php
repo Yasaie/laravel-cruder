@@ -41,14 +41,13 @@ class Crud
         $query = [
             'search' => $request->search,
             'sort' => $request->sort,
-            'desc' => $request->desc
         ];
 
         # Custom fields
         $search = $request->search;
         $column = $request->column;
         $sort = $request->sort ?: $sort_by;
-        $desc = $request->desc ? 1 : 0;
+        $sort = str_replace('_desc', '', $sort, $desc);
 
         # flatten and Search in model if search requested
         $items = Y::flattenItems($items, $heads, $search, $column);
