@@ -133,4 +133,23 @@ class Crud
             'result' => $item->delete()
         ];
     }
+
+    /**
+     * @package upload
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     * @param $item
+     * @param $requests
+     * @param $collection
+     */
+    static public function upload($item, $requests, $collection)
+    {
+        $requests = is_array($requests)
+            ? $requests
+            : explode(',', request()->images);
+
+        foreach ($requests as $r) {
+            \Auth::user()->media()->find($r)->move($item, $collection);
+        }
+    }
 }
