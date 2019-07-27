@@ -149,7 +149,10 @@ class Crud
             : explode(',', request()->images);
 
         foreach ($requests as $r) {
-            \Auth::user()->media()->find($r)->move($item, $collection);
+            $file = \Auth::user()->media()->find($r);
+            if ($file) {
+                $file->move($item, $collection);
+            }
         }
     }
 }
