@@ -146,7 +146,7 @@ class Crud
     {
         $requests = is_array($requests)
             ? $requests
-            : explode(',', request()->images);
+            : explode(',', $requests);
 
         foreach ($requests as $r) {
             $file = \Auth::user()->media()->find($r);
