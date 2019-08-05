@@ -120,18 +120,31 @@ class Crud
      *
      * @param $item
      * @param null $model
+     * @param null $role
      *
-     * @return mixed
+     * @return array
      */
-    static public function destroy($item, $model = null)
+    static public function destroy($item, $model = null, $role = null)
     {
-        if (!is_object($item)) {
+        if ($role !== null) {
+            $user = \Auth::user();
+            $has_item = $user->$model()->find($item);
+
+            if ($role or $has_item) {
+                $result = $has_item->delete();
+            } else {
+                $result = 'Unauthorized';
+            }
+        } elseif (!is_object($item)) {
             $item = $model::find($item);
+            if ($item) {
+                $result = $item->delete();
+            } else {
+                $result = 'Not Found';
+            }
         }
 
-        return [
-            'result' => $item->delete()
-        ];
+        return compact('result');
     }
 
     /**
