@@ -101,10 +101,11 @@ class Crud
         $count = $items->count();
 
         # if is sortable sort
-        if (in_array($sort, $sortable)) {
+        if ($sortable->contains($sort)) {
             $items = $items->orderBy($sort, $desc);
         }
 
+        # if search was defined
         if ($search) {
             $search_column = $column ? [$column] : $searchable->toArray();
 
