@@ -97,9 +97,6 @@ class Crud
         $sort = str_replace('_desc', '', $sort, $desc);
         $desc = $desc ? 'desc' : 'asc';
 
-        # count all items
-        $count = $items->count();
-
         # if is sortable sort
         if ($sortable->contains($sort)) {
             $items = $items->orderBy($sort, $desc);
@@ -115,6 +112,9 @@ class Crud
 
             $items->whereRaw($text, compact('search'));
         }
+
+        # count all items
+        $count = $items->count();
 
         # paginate
         $items = $items->paginate($per_page);
