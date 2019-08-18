@@ -9,6 +9,7 @@ namespace Yasaie\Cruder;
 
 use Yasaie\Helper\Y;
 use Yasaie\Paginate\Helper;
+use Yasaie\Support\Yalp;
 
 class Crud
 {
@@ -55,6 +56,71 @@ class Crud
         $items = $items->sortBy($sort, SORT_NATURAL, $desc);
         # Paginate items
         $pages = Helper::paginate($items, $request->page, $perPage);
+
+        return view('admin.crud.table')
+            ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
+    }
+
+    /**
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     * @since   2019-08-18
+     *
+     * @param $items
+     * @param $heads
+     * @param $sort_by
+     * @param $per_page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    static public function all($items, $heads, $sort_by, $per_page)
+    {
+        $heads_collect = collect($heads);
+
+        $searchable = $heads_collect->pluck('searchable', 'name')
+            ->filter();
+
+        $sortable = $heads_collect->pluck('sortable', 'name')
+            ->filter()
+            ->merge($searchable)
+            ->keys();
+
+        # Url query requested
+        $query = [
+            'search' => request()->search,
+            'sort' => request()->sort,
+        ];
+
+        # Custom fields
+        $search = request()->search;
+        $column = request()->column;
+        $sort = request()->sort ?: $sort_by;
+        $sort = str_replace('_desc', '', $sort, $desc);
+        $desc = $desc ? 'desc' : 'asc';
+
+        # count all items
+        $count = $items->count();
+
+        # if is sortable sort
+        if (in_array($sort, $sortable)) {
+            $items = $items->orderBy($sort, $desc);
+        }
+
+        if ($search) {
+            $search_column = $column ? [$column] : $searchable->toArray();
+
+            $text = 'CONCAT(COALESCE('
+                . implode(", ' '), COALESCE(", $search_column)
+                . ", ' ')) REGEXP CONCAT('(', ?, ')')";
+
+            $items->whereRaw($text, compact('search'));
+        }
+
+        # paginate
+        $items = $items->paginate($per_page);
+        $pages = Yalp::paginate($per_page, $count, $items->currentPage());
+
+        # get final items
+        $items = Yalp::flatten($items->items(), $heads);
 
         return view('admin.crud.table')
             ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
