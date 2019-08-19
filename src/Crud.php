@@ -84,12 +84,6 @@ class Crud
             ->merge($searchable)
             ->keys();
 
-        # Url query requested
-        $query = [
-            'search' => request()->search,
-            'sort' => request()->sort,
-        ];
-
         # Custom fields
         $search = request()->search;
         $column = request()->column;
@@ -113,18 +107,14 @@ class Crud
             $items->whereRaw($text, compact('search'));
         }
 
-        # count all items
-        $count = $items->count();
-
         # paginate
-        $items = $items->paginate($per_page);
-        $pages = Yalp::paginate($per_page, $count, $items->currentPage());
+        $paginate = $items->paginate($per_page)->appends(request()->all());
 
         # get final items
-        $items = Yalp::flatten($items->items(), $heads);
+        $items = Yalp::flatten($paginate->items(), $heads);
 
-        return view('admin.crud.table')
-            ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
+        return view('admin.crud.all')
+            ->with(compact('heads', 'sort', 'desc', 'items', 'paginate', 'sortable'));
     }
 
     /**
