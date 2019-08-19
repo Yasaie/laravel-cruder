@@ -63,16 +63,26 @@ class Crud
 
     /**
      * @author  Payam Yasaie <payam@yasaie.ir>
-     * @since   2019-08-18
+     * @since   2019-08-19
      *
-     * @param $items
-     * @param $heads
-     * @param $sort_by
-     * @param $per_page
+     * @param \Illuminate\Database\Eloquent\Builder $items
+     * @param array         $heads
+     *      [
+     *          [
+     *              'name' => 'name'        # required
+     *              'get' => 'get'          # default is name
+     *              'sortable' => true      # default false
+     *              'searchable' => 'name'  # default false
+     *              'clickable' => true'    # default false
+     *              'hidden' => true        # default false
+     *          ]
+     *      ]
+     * @param int           $per_page
+     * @param string|null   $sort_by
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    static public function all($items, $heads, $per_page, $sort_by = null)
+    static public function all(\Illuminate\Database\Eloquent\Builder $items, array $heads, int $per_page, string $sort_by = null)
     {
         $heads_collect = collect($heads);
 
