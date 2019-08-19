@@ -98,7 +98,7 @@ class Crud
 
         # if search was defined
         if ($search) {
-            $search_column = $column ? [$column] : $searchable->toArray();
+            $search_column = $column ? [$searchable[$column]] : $searchable->toArray();
 
             $text = 'CONCAT(COALESCE('
                 . implode(", ' '), COALESCE(", $search_column)
