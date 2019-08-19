@@ -89,11 +89,10 @@ class Crud
         $column = request()->column;
         $sort = request()->sort ?: $sort_by;
         $sort = str_replace('_desc', '', $sort, $desc);
-        $desc = $desc ? 'desc' : 'asc';
 
         # if is sortable sort
         if ($sortable->contains($sort)) {
-            $items = $items->orderBy($sort, $desc);
+            $items = $items->orderBy($sort, $desc ? 'desc' : 'asc');
         }
 
         # if search was defined
