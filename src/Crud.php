@@ -72,7 +72,7 @@ class Crud
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    static public function all($items, $heads, $sort_by, $per_page)
+    static public function all($items, $heads, $per_page, $sort_by = null)
     {
         $heads_collect = collect($heads);
 
