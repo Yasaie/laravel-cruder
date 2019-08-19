@@ -113,7 +113,7 @@ class Crud
         $items = Yalp::flatten($paginate->items(), $heads);
 
         return view('admin.crud.all')
-            ->with(compact('heads', 'sort', 'desc', 'items', 'paginate', 'sortable'));
+            ->with(compact('heads', 'sort', 'desc', 'items', 'paginate', 'sortable', 'searchable'));
     }
 
     /**
