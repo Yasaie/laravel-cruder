@@ -125,7 +125,7 @@ class Crud
         # get final items
         $items = Yalp::flatten($paginate->items(), $heads);
 
-        return view('admin.crud.all')
+        return view('Cruder::page.all')
             ->with(compact('heads', 'sort', 'desc', 'items', 'paginate', 'sortable', 'searchable'));
     }
 
