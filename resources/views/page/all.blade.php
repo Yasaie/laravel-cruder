@@ -22,34 +22,37 @@
                         <span class="text-warning" style="font-size: 15px">{{$paginate->total()}}</span>
                     </div>
 
-                    <form class="input-group input-group-sm" style="width: 380px;">
+                    @if(isset($searchable) and $searchable->count())
+                        <form class="input-group input-group-sm" style="width: 380px;">
 
-                        @if(isset($searchable) and $searchable->count() > 1)
-                            <select name="column" class="form-control mx-1" style="max-width: 130px;">
-                                <option value="">@lang('Cruder::crud.all')</option>
-                                @foreach($searchable as $key => $srb)
-                                    <option value="{{$key}}" {{ request()->column == $key ? 'selected' : '' }}>@lang('model.' . $key)</option>
-                                @endforeach
-                            </select>
-                        @endif
-
-                        <input type="text" name="search" class="form-control float-right"
-                               placeholder="@lang('Cruder::crud.search')" value="{{request()->search}}">
-                        <div class="input-group-append">
-                            @if(request()->search)
-                                @php
-                                    $cancel = array_filter(request()->except('search'));
-                                @endphp
-                                <a href="{{$cancel ? '?' . http_build_query($cancel) : url()->current()}}" type="submit"
-                                   class="btn btn-default">
-                                    <i class="fa fa-remove"></i>
-                                </a>
+                            @if($searchable->count() > 1)
+                                <select name="column" class="form-control mx-1" style="max-width: 130px;">
+                                    <option value="">@lang('Cruder::crud.all')</option>
+                                    @foreach($searchable as $key => $srb)
+                                        <option value="{{$key}}" {{ request()->column == $key ? 'selected' : '' }}>@lang('model.' . $key)</option>
+                                    @endforeach
+                                </select>
                             @endif
-                            <button type="submit" class="btn btn-default">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
+
+                            <input type="text" name="search" class="form-control float-right"
+                                   placeholder="@lang('Cruder::crud.search')" value="{{request()->search}}">
+                            <div class="input-group-append">
+                                @if(request()->search)
+                                    @php
+                                        $cancel = array_filter(request()->except('search'));
+                                    @endphp
+                                    <a href="{{$cancel ? '?' . http_build_query($cancel) : url()->current()}}"
+                                       type="submit"
+                                       class="btn btn-default">
+                                        <i class="fa fa-remove"></i>
+                                    </a>
+                                @endif
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    @endif
 
                 </div>
             </div>
@@ -79,7 +82,7 @@
                                     @endif
                                 @endif
                             @endforeach
-                                @canany(["$route.show", "$route.edit", "$route.destroy"])
+                            @canany(["$route.show", "$route.edit", "$route.destroy"])
                                 <th class="text-center">@lang('Cruder::crud.actions')</th>
                             @endcanany
                         </tr>

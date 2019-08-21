@@ -69,7 +69,7 @@ class Crud
      * @author  Payam Yasaie <payam@yasaie.ir>
      * @since   2019-08-19
      *
-     * @param Builder $items
+     * @param               $items
      * @param array         $heads
      *      [
      *          [
@@ -87,7 +87,7 @@ class Crud
      *
      * @return Factory|View
      */
-    static public function all(Builder $items, array $heads, int $per_page, string $sort_by = null)
+    static public function all($items, array $heads, int $per_page, string $sort_by = null)
     {
         $heads_collect = collect($heads);
 
