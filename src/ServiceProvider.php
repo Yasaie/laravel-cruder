@@ -29,8 +29,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
+        # Loads
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'Cruder');
 
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'Cruder');
+
+        # Publishes
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/cruder'),
         ], 'views');
@@ -38,5 +42,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->publishes([
             __DIR__.'/../public' => public_path('vendor/cruder'),
         ], 'public');
+
+        $this->publishes([
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/cruder'),
+        ], 'lang');
     }
 }
