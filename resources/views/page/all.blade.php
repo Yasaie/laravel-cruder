@@ -12,13 +12,13 @@
                     <div class="flex-grow-1">
                         @can("$route.create")
                             <a href="{{route("$route.create")}}" class="btn btn-success btn-sm">
-                                <i class="fa fa-file"></i> @lang('Cruder::add')
+                                <i class="fa fa-file"></i> @lang('Cruder::crud.add')
                             </a>
                         @endcan
                     </div>
 
                     <div class="badge badge-dark mx-3 py-2 px-sm-3">
-                        <span class="font-weight-normal">@lang("Cruder::results") : </span>
+                        <span class="font-weight-normal">@lang("Cruder::crud.results") : </span>
                         <span class="text-warning" style="font-size: 15px">{{$paginate->total()}}</span>
                     </div>
 
@@ -26,7 +26,7 @@
 
                         @if(isset($searchable) and $searchable->count() > 1)
                             <select name="column" class="form-control mx-1" style="max-width: 130px;">
-                                <option value="">@lang('Cruder::all')</option>
+                                <option value="">@lang('Cruder::crud.all')</option>
                                 @foreach($searchable as $key => $srb)
                                     <option value="{{$key}}" {{ request()->column == $key ? 'selected' : '' }}>@lang('model.' . $key)</option>
                                 @endforeach
@@ -34,7 +34,7 @@
                         @endif
 
                         <input type="text" name="search" class="form-control float-right"
-                               placeholder="@lang('Cruder::search')" value="{{request()->search}}">
+                               placeholder="@lang('Cruder::crud.search')" value="{{request()->search}}">
                         <div class="input-group-append">
                             @if(request()->search)
                                 @php
@@ -80,7 +80,7 @@
                                 @endif
                             @endforeach
                                 @canany(["$route.show", "$route.edit", "$route.destroy"])
-                                <th class="text-center">@lang('Cruder::actions')</th>
+                                <th class="text-center">@lang('Cruder::crud.actions')</th>
                             @endcanany
                         </tr>
                         </thead>

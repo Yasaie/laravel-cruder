@@ -31,7 +31,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         # Loads
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'Cruder');
-
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'Cruder');
 
         # Publishes
