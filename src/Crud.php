@@ -7,6 +7,10 @@
 
 namespace Yasaie\Cruder;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Yasaie\Helper\Y;
 use Yasaie\Paginate\Helper;
 use Yasaie\Support\Yalp;
@@ -15,7 +19,6 @@ class Crud
 {
 
     /**
-     * @package index
      * @author  Payam Yasaie <payam@yasaie.ir>
      *
      * @param $items
@@ -24,7 +27,8 @@ class Crud
      * @param $perPage
      * @param array $load
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
+     *@package index
      */
     static public function index($items, $heads, $sort_by, $perPage, $load = [])
     {
@@ -65,24 +69,25 @@ class Crud
      * @author  Payam Yasaie <payam@yasaie.ir>
      * @since   2019-08-19
      *
-     * @param \Illuminate\Database\Eloquent\Builder $items
+     * @param Builder $items
      * @param array         $heads
      *      [
      *          [
-     *              'name' => 'name'        # required
-     *              'get' => 'get'          # default is name
-     *              'sortable' => true      # default false
-     *              'searchable' => 'name'  # default false
-     *              'clickable' => true'    # default false
-     *              'hidden' => true        # default false
+     *              'name' => 'name',        # required
+     *              'get' => 'get',          # default is name
+     *              'sortable' => true,      # default false
+     *              'searchable' => 'name',  # default false
+     *              'clickable' => true',    # default false
+     *              'hidden' => true,        # default false
+     *              'append' => 'string'     # default is ''
      *          ]
      *      ]
      * @param int           $per_page
      * @param string|null   $sort_by
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
-    static public function all(\Illuminate\Database\Eloquent\Builder $items, array $heads, int $per_page, string $sort_by = null)
+    static public function all(Builder $items, array $heads, int $per_page, string $sort_by = null)
     {
         $heads_collect = collect($heads);
 
@@ -130,37 +135,49 @@ class Crud
     }
 
     /**
-     * @package show
      * @author  Payam Yasaie <payam@yasaie.ir>
+     * @since   2019-08-21
      *
-     * @param $item
-     * @param $heads
-     * @param $route
-     * @param null $model
-     * @param array $load
+     * @param int|\Eloquent  $item
+     * @param array          $heads
+     *      [
+     *          [
+     *              'name' => 'name',        # required
+     *              'get' => 'get',          # default is name
+     *              'link' => [
+     *                  'route' => 'admin.route.name',
+     *                  'search' => 'search',
+     *                  'column' => 'column'
+     *              ]
+     *              'append' => 'string'     # default is ''
+     *          ]
+     *      ]
+     * @param string         $model
+     * @param array          $load
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return Factory|View
      */
-    static public function show($item, $heads, $route = null, $model = null, $load = [])
+    static public function show($item, array $heads, string $model = '', array $load = [])
     {
         if (!is_object($item)) {
             $item = $model::find($item);
         }
 
-        if (!$item and $route) {
-            return redirect()->route($route . '.index');
+        if (!$item) {
+            abort(404);
         }
 
         if ($load) {
             $item = $item->load($load);
         }
 
-        return view('admin.crud.show')
+        $item = Yalp::flatten([$item], $heads)->first();
+
+        return view('Cruder::page.show')
             ->with(compact('item', 'heads'));
     }
 
     /**
-     * @package create
      * @author  Payam Yasaie <payam@yasaie.ir>
      *
      * @param $inputs
@@ -168,7 +185,8 @@ class Crud
      * @param null $form_action
      * @param null $form_id
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
+     *@package create
      */
     static public function create($inputs, $multilang = null, $form_action = null, $form_id = null)
     {
