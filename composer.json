@@ -18,6 +18,13 @@
             "Yasaie\\Cruder\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yasaie\\Cruder\\ServiceProvider"
+            ]
+        }
+    },
     "repositories": [
         {
             "type": "github",
