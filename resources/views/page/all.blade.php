@@ -10,11 +10,11 @@
                 <div class="card-body d-flex justify-content-around">
 
                     <div class="flex-grow-1">
-                        @if($crud['create'])
+                        @can("$route.create")
                             <a href="{{route("$route.create")}}" class="btn btn-success btn-sm">
                                 <i class="fa fa-file"></i> @lang('crud.add')
                             </a>
-                        @endif
+                        @endcan
                     </div>
 
                     <div class="badge badge-dark mx-3 py-2 px-sm-3">
@@ -40,7 +40,8 @@
                                 @php
                                     $cancel = array_filter(request()->except('search'));
                                 @endphp
-                                <a href="{{$cancel ? '?' . http_build_query($cancel) : url()->current()}}" type="submit" class="btn btn-default">
+                                <a href="{{$cancel ? '?' . http_build_query($cancel) : url()->current()}}" type="submit"
+                                   class="btn btn-default">
                                     <i class="fa fa-remove"></i>
                                 </a>
                             @endif
@@ -78,7 +79,7 @@
                                     @endif
                                 @endif
                             @endforeach
-                            @canany([$route . '.show', $route . '.edit', $route . '.destroy'])
+                                @canany(["$route.show", "$route.edit", "$route.destroy"])
                                 <th class="text-center">@lang('crud.actions')</th>
                             @endcanany
                         </tr>
@@ -109,17 +110,17 @@
                                     @endif
                                 @endforeach
 
-                                @canany([$route . '.show', $route . '.edit', $route . '.destroy'])
+                                @canany(["$route.show", "$route.edit", "$route.destroy"])
                                     <td class="text-center">
-                                        @can($route . '.show')
-                                            <a href="{{route($route . '.show', $item->id)}}"
+                                        @can("$route.show")
+                                            <a href="{{route("$route.show", $item->id)}}"
                                                class="btn btn-info btn-sm fa fa-eye"></a>
                                         @endcan
-                                        @can($route . '.edit')
-                                            <a href="{{route($route . '.edit', $item->id)}}"
+                                        @can("$route.edit")
+                                            <a href="{{route("$route.edit", $item->id)}}"
                                                class="btn btn-success btn-sm fa fa-pencil"></a>
                                         @endcan
-                                        @can($route . '.destroy')
+                                        @can("$route.destroy")
                                             <button onclick="deleteItem({{$item->id}})"
                                                     class="btn btn-danger btn-sm fa fa-trash"></button>
                                         @endcan
@@ -147,5 +148,16 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{asset('assets/admin/js/delete.min.js')}}"></script>
+    <script>
+        const iziToastConst = {
+            position: '{{ isRTL() ? 'bottomLeft' : 'bottomRight' }}',
+            timeout: 10000,
+            transitionIn: 'flipInX',
+            transitionOut: 'flipOutX',
+            maxWidth: '40vw',
+            rtl: {{isRTL()}}
+        };
+    </script>
+    <script type="text/javascript" src="{{asset('vendor/cruder/plugins/iziToast/js/iziToast.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('vendor/cruder/js/delete.min.js')}}"></script>
 @endsection

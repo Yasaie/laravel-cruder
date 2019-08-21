@@ -19,9 +19,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function register()
     {
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/cruder'),
-        ], 'views');
+        //
     }
 
     /**
@@ -32,5 +30,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'Cruder');
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/cruder'),
+        ], 'views');
+
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/cruder'),
+        ], 'public');
     }
 }
