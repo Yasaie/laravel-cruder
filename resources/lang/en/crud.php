@@ -15,4 +15,5 @@ return [
     'search' => 'Search',
     'all' => 'All',
     'results' => 'Results',
+    'to' => 'To'
 ];

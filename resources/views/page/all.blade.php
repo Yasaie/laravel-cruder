@@ -19,7 +19,14 @@
 
                     <div class="badge badge-dark mx-3 py-2 px-sm-3">
                         <span class="font-weight-normal">@lang("Cruder::crud.results") : </span>
-                        <span class="text-warning" style="font-size: 15px">{{$paginate->total()}}</span>
+                        <span class="text-warning position-relative" style="font-size: 1.4em; top: 1px"> {{$paginate->total()}}</span>
+
+                        @if($paginate->total())
+                            <span class="fa fa-hashtag text-warning"></span>
+                            <span style="font-size: 1.1em">{{$paginate->firstItem()}}</span>
+                            @lang('Cruder::crud.to')
+                            <span style="font-size: 1.1em">{{$paginate->lastItem()}}</span>
+                        @endif
                     </div>
 
                     @if(isset($searchable) and $searchable->count())
