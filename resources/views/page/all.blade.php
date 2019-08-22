@@ -7,60 +7,89 @@
         <div class="col-12">
 
             <div class="card">
-                <div class="card-body d-flex justify-content-around">
+                <div class="card-body">
 
-                    <div class="flex-grow-1">
-                        @can("$route.create")
-                            <a href="{{route("$route.create")}}" class="btn btn-success btn-sm">
-                                <i class="fa fa-file"></i> @lang('Cruder::crud.add')
-                            </a>
-                        @endcan
-                    </div>
+                    <form class="row" id="all-table">
 
-                    <div class="badge badge-dark mx-3 py-2 px-sm-3">
-                        <span class="font-weight-normal">@lang("Cruder::crud.results") : </span>
-                        <span class="text-warning position-relative" style="font-size: 1.4em; top: 1px"> {{$paginate->total()}}</span>
+                        <div class="col-md-3 mb-2 mb-sm-0">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6">
+                                    @can("$route.create")
+                                        <a href="{{route("$route.create")}}" class="btn btn-success btn-sm w-100">
+                                            <i class="fa fa-file"></i> @lang('Cruder::crud.add')
+                                        </a>
+                                    @endcan
+                                </div>
+                            </div>
+                        </div>
 
-                        @if($paginate->total())
-                            <span class="fa fa-hashtag text-warning"></span>
-                            <span style="font-size: 1.1em">{{$paginate->firstItem()}}</span>
-                            @lang('Cruder::crud.to')
-                            <span style="font-size: 1.1em">{{$paginate->lastItem()}}</span>
-                        @endif
-                    </div>
+                        <div class="col-md-2 col-sm-3 mb-2 mb-sm-0">
+                            <div class="badge badge-dark py-2 w-100">
+                                <span class="font-weight-normal">@lang("Cruder::crud.results") : </span>
+                                <span class="text-warning position-relative"
+                                      style="font-size: 1.4em; top: 1px"> {{$paginate->total()}}</span>
 
-                    @if(isset($searchable) and $searchable->count())
-                        <form class="input-group input-group-sm" style="width: 380px;">
+                                @if($paginate->total())
+                                    <span class="fa fa-hashtag text-warning"></span>
+                                    <span style="font-size: 1.1em">{{$paginate->firstItem()}}</span>
+                                    @lang('Cruder::crud.to')
+                                    <span style="font-size: 1.1em">{{$paginate->lastItem()}}</span>
+                                @endif
+                            </div>
+                        </div>
 
-                            @if($searchable->count() > 1)
-                                <select name="column" class="form-control mx-1" style="max-width: 130px;">
-                                    <option value="">@lang('Cruder::crud.all')</option>
-                                    @foreach($searchable as $key => $srb)
-                                        <option value="{{$key}}" {{ request()->column == $key ? 'selected' : '' }}>@lang('model.' . $key)</option>
+                        <div class="col-md-2 d-flex mb-2 mb-sm-0">
+                            <div class="input-group-sm d-flex w-100">
+                                <label for="rows" class="w-50 m-2 small">سطرها:</label>
+                                <select name="rows" id="rows" class="form-control" onchange="document.getElementById('all-table').submit()">
+                                    @php
+                                        $rows = [15, 25, 50, 100];
+                                    @endphp
+                                    @foreach($rows as $row)
+                                        <option {{ $paginate->perPage() == $row ? 'selected' : '' }}>{{$row}}</option>
                                     @endforeach
                                 </select>
-                            @endif
-
-                            <input type="text" name="search" class="form-control float-right"
-                                   placeholder="@lang('Cruder::crud.search')" value="{{request()->search}}">
-                            <div class="input-group-append">
-                                @if(request()->search)
-                                    @php
-                                        $cancel = array_filter(request()->except('search'));
-                                    @endphp
-                                    <a href="{{$cancel ? '?' . http_build_query($cancel) : url()->current()}}"
-                                       type="submit"
-                                       class="btn btn-default">
-                                        <i class="fa fa-remove"></i>
-                                    </a>
-                                @endif
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-search"></i>
-                                </button>
                             </div>
-                        </form>
-                    @endif
+                        </div>
 
+                        <div class="col-sm-5">
+                            @if(isset($searchable) and $searchable->count())
+                                <div class="input-group input-group-sm w-100">
+
+                                    @if($searchable->count() > 1)
+                                        <select name="column" class="form-control"
+                                                style="max-width: 130px;">
+                                            <option value="">@lang('Cruder::crud.all')</option>
+                                            @foreach($searchable as $key => $srb)
+                                                <option value="{{$key}}" {{ request()->column == $key ? 'selected' : '' }}>@lang('model.' . $key)</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
+
+                                    <input type="text" name="search" class="form-control float-right"
+                                           placeholder="@lang('Cruder::crud.search')"
+                                           value="{{request()->search}}">
+                                    <div class="input-group-append">
+                                        @if(request()->search)
+                                            @php
+                                                $cancel = array_filter(request()->except('search'));
+                                            @endphp
+                                            <a href="{{$cancel ? '?' . http_build_query($cancel) : url()->current()}}"
+                                               type="submit"
+                                               class="btn btn-default">
+                                                <i class="fa fa-remove"></i>
+                                            </a>
+                                        @endif
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            @endif
+                        </div>
+
+                    </form>
                 </div>
             </div>
 

@@ -65,6 +65,7 @@ class Crud
         # Custom fields
         $search = request()->search;
         $column = request()->column;
+        $per_page = request()->rows ?: $per_page;
         $sort = request()->sort ?: $sort_by;
         $sort = str_replace('_desc', '', $sort, $desc);
 
