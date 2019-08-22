@@ -267,7 +267,7 @@ class Crud
      */
     static public function create($inputs, $multilang = null, $form_action = null, $form_id = null)
     {
-        return self::form($inputs, $multilang, $form_action, $form_id);
+        return self::form($inputs, $multilang ?: [], $form_action ?: '', $form_id ?: 0);
     }
 
 }

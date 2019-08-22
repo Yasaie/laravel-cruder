@@ -12,13 +12,13 @@
         maxWidth: '40vw',
         rtl: {{isRTL()}}
     };
+    @if ($errors->any())
     $(document).ready(function () {
-        @if ($errors->any())
         @foreach ($errors->all() as $error)
         iziToast.error(Object.assign({}, iziToastConst, {
             message: '{{ $error }}'
         }));
         @endforeach
-        @endif
     });
+    @endif
 </script>
