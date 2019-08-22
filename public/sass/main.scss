@@ -1,8 +1,9 @@
+@import "../plugins/font-awesome/css/font-awesome";
+@import "../plugins/iziToast/css/iziToast";
+
 @import "variable";
 @import "font";
-@import "../../plugins/font-awesome/css/font-awesome.min";
-@import "../../plugins/datatables/jquery.dataTables";
-@import "../../plugins/iziToast/css/iziToast";
+@import "dataTables";
 @import "bootstrap";
 @import "admin";
 @import "custom";
