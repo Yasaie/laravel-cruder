@@ -1,0 +1,118 @@
+/*
+ * Component: Control sidebar. By default, this is the right sidebar.
+ */
+.control-sidebar {
+  position: absolute;
+  top: 2.5rem;
+  z-index: 830;
+}
+
+.control-sidebar, .control-sidebar:before {
+  width: 250px;
+  right: -250px;
+  bottom: 0;
+  transition: right 0.3s ease-in-out;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .control-sidebar, .control-sidebar:before {
+    transition: none;
+  }
+}
+
+.control-sidebar:before {
+  top: 0;
+  display: block;
+  position: fixed;
+  content: " ";
+  z-index: -1;
+}
+
+@media (min-width: 768px) {
+  .control-sidebar-open .control-sidebar, .control-sidebar-open .control-sidebar:before {
+    right: 0;
+  }
+  .control-sidebar-open .content-wrapper,
+  .control-sidebar-open .main-footer {
+    margin-right: 250px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .control-sidebar-open .control-sidebar, .control-sidebar-open .control-sidebar:before {
+    right: 0;
+  }
+}
+
+.control-sidebar-slide-open .control-sidebar, .control-sidebar-slide-open .control-sidebar:before {
+  right: 0;
+}
+
+.control-sidebar-dark,
+.control-sidebar-dark a,
+.control-sidebar-dark .nav-link {
+  color: #C2C7D0;
+}
+
+.control-sidebar-dark, .control-sidebar-dark:before {
+  background: #343a40;
+}
+
+.control-sidebar-dark a:hover {
+  color: #ffffff;
+}
+
+.control-sidebar-dark h1,
+.control-sidebar-dark h2,
+.control-sidebar-dark h3,
+.control-sidebar-dark h4,
+.control-sidebar-dark h5,
+.control-sidebar-dark h6,
+.control-sidebar-dark label {
+  color: #ffffff;
+}
+
+.control-sidebar-dark .nav-tabs {
+  border-bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-bottom: 5px;
+}
+
+.control-sidebar-dark .nav-tabs .nav-item {
+  margin: 0;
+}
+
+.control-sidebar-dark .nav-tabs .nav-link {
+  position: relative;
+  border-radius: 0;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.control-sidebar-dark .nav-tabs .nav-link, .control-sidebar-dark .nav-tabs .nav-link:hover, .control-sidebar-dark .nav-tabs .nav-link:active, .control-sidebar-dark .nav-tabs .nav-link:focus, .control-sidebar-dark .nav-tabs .nav-link.active {
+  border: 0;
+}
+
+.control-sidebar-dark .nav-tabs .nav-link:hover, .control-sidebar-dark .nav-tabs .nav-link:active, .control-sidebar-dark .nav-tabs .nav-link:focus, .control-sidebar-dark .nav-tabs .nav-link.active {
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent;
+  color: #ffffff;
+}
+
+.control-sidebar-dark .nav-tabs .nav-link.active {
+  background-color: #343a40;
+}
+
+.control-sidebar-dark .tab-pane {
+  padding: 10px 15px;
+}
+
+.control-sidebar-light {
+  color: #4b545c;
+}
+
+.control-sidebar-light, .control-sidebar-light:before {
+  background: #ffffff;
+  border-left: 1px solid #adb5bd;
+}

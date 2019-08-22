@@ -1,0 +1,154 @@
+/*
+ * Component: Main Header
+ * ----------------------
+ */
+.main-header {
+  z-index: 1000;
+}
+
+.main-header .navbar-nav .nav-item {
+  margin: 0;
+}
+
+.main-header .nav-link {
+  position: relative;
+  height: 2.5rem;
+}
+
+.main-header .navbar-nav[class*="-right"] .dropdown-menu {
+  margin-top: -3px;
+  right: 0;
+  left: auto;
+}
+
+@media (max-width: 575.98px) {
+  .main-header .navbar-nav[class*="-right"] .dropdown-menu {
+    left: 0;
+    right: auto;
+  }
+}
+
+.navbar-img {
+  height: 1.25rem;
+  width: auto;
+}
+
+.navbar-badge {
+  position: absolute;
+  top: 9px;
+  right: 5px;
+  font-size: .6rem;
+  font-weight: 300;
+  padding: 2px 4px;
+}
+
+.btn-navbar {
+  border-left-width: 0;
+  background-color: transparent;
+}
+
+.form-control-navbar {
+  border-right-width: 0;
+}
+
+.form-control-navbar + .input-group-append {
+  margin-left: 0;
+}
+
+.form-control-navbar,
+.btn-navbar {
+  transition: none;
+}
+
+.navbar-dark .form-control-navbar,
+.navbar-dark .btn-navbar {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 0;
+}
+
+.navbar-dark .form-control-navbar::placeholder,
+.navbar-dark .form-control-navbar + .input-group-append > .btn-navbar {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-dark .form-control-navbar :-moz-placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-dark .form-control-navbar ::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-dark .form-control-navbar :-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-dark .form-control-navbar:focus,
+.navbar-dark .form-control-navbar:focus + .input-group-append .btn-navbar {
+  border: 0 !important;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #343a40;
+}
+
+.navbar-light .form-control-navbar,
+.navbar-light .btn-navbar {
+  background-color: #f2f4f6;
+  border: 0;
+}
+
+.navbar-light .form-control-navbar::placeholder,
+.navbar-light .form-control-navbar + .input-group-append > .btn-navbar {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar-light .form-control-navbar :-moz-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar-light .form-control-navbar ::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar-light .form-control-navbar :-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar-light .form-control-navbar:focus,
+.navbar-light .form-control-navbar:focus + .input-group-append .btn-navbar {
+  border: 0 !important;
+  background-color: #e9ecef;
+  color: #343a40;
+}
+
+.brand-link {
+  padding: 0.8125rem 0.5rem;
+  font-size: 1.25rem;
+  display: block;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.brand-link:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+[class*="sidebar-dark"] .brand-link {
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid #4b545c;
+}
+
+[class*="sidebar-light"] .brand-link {
+  color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #dee2e6;
+}
+
+.brand-image {
+  float: left;
+  line-height: .8;
+  max-height: 34px;
+  width: auto;
+  margin-left: .8rem;
+  margin-right: .5rem;
+  margin-top: -3px;
+}

@@ -8,62 +8,22 @@
 namespace Yasaie\Cruder;
 
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Yasaie\Helper\Y;
-use Yasaie\Paginate\Helper;
 use Yasaie\Support\Yalp;
 
+use Yasaie\Helper\Y;
+use Yasaie\Paginate\Helper;
+
+/**
+ * Class    Crud
+ *
+ * @author  Payam Yasaie <payam@yasaie.ir>
+ * @since   2019-08-22
+ *
+ * @package Yasaie\Cruder
+ */
 class Crud
 {
-
-    /**
-     * @author  Payam Yasaie <payam@yasaie.ir>
-     *
-     * @param $items
-     * @param $heads
-     * @param $sort_by
-     * @param $perPage
-     * @param array $load
-     *
-     * @return Factory|View
-     *@package index
-     */
-    static public function index($items, $heads, $sort_by, $perPage, $load = [])
-    {
-        if (!is_object($items)) {
-            $items = $items::get();
-        }
-
-        if ($load) {
-            $items = $items->load($load);
-        }
-
-        # get all requests
-        $request = request();
-        # Url query requested
-        $query = [
-            'search' => $request->search,
-            'sort' => $request->sort,
-        ];
-
-        # Custom fields
-        $search = $request->search;
-        $column = $request->column;
-        $sort = $request->sort ?: $sort_by;
-        $sort = str_replace('_desc', '', $sort, $desc);
-
-        # flatten and Search in model if search requested
-        $items = Y::flattenItems($items, $heads, $search, $column);
-        # Sort and desc/asc items
-        $items = $items->sortBy($sort, SORT_NATURAL, $desc);
-        # Paginate items
-        $pages = Helper::paginate($items, $request->page, $perPage);
-
-        return view('admin.crud.table')
-            ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
-    }
 
     /**
      * @author  Payam Yasaie <payam@yasaie.ir>
@@ -179,16 +139,16 @@ class Crud
 
     /**
      * @author  Payam Yasaie <payam@yasaie.ir>
+     * @since   2019-08-22
      *
-     * @param $inputs
-     * @param null $multilang
-     * @param null $form_action
-     * @param null $form_id
+     * @param array  $inputs
+     * @param array  $locals
+     * @param string $form_action
+     * @param int    $form_id
      *
      * @return Factory|View
-     *@package create
      */
-    static public function create($inputs, $multilang = null, $form_action = null, $form_id = null)
+    static public function form(array $inputs, array $locals = [], string $form_action = '', int $form_id = 0)
     {
         if (!$form_action) {
             $form_action = \Request::route()->parameters
@@ -197,52 +157,43 @@ class Crud
 
         $form_id = $form_id ?: current(\Request::route()->parameters);
 
-        return view('admin.crud.create')
-            ->with(compact('inputs', 'multilang', 'form_action', 'form_id'));
+        return view('Cruder::page.form')
+            ->with(compact('inputs', 'locals', 'form_action', 'form_id'));
     }
 
     /**
-     * @package destroy
      * @author  Payam Yasaie <payam@yasaie.ir>
+     * @since   2019-08-22
      *
-     * @param $item
-     * @param null $model
-     * @param null $role
+     * @param        $item
+     * @param string $model
      *
      * @return array
      */
-    static public function destroy($item, $model = null, $role = null)
+    static public function destroy($item, string $model = '')
     {
-        if ($role !== null) {
-            $user = \Auth::user();
-            $has_item = $user->$model()->find($item);
-
-            if ($role or $has_item) {
-                $result = $has_item->delete();
-            } else {
-                $result = 'Unauthorized';
-            }
-        } elseif (!is_object($item)) {
+        if (!is_object($item)) {
             $item = $model::find($item);
-            if ($item) {
-                $result = $item->delete();
-            } else {
-                $result = 'Not Found';
-            }
+        }
+
+        if ($item) {
+            $result = $item->delete();
+        } else {
+            $result = 'Not Found';
         }
 
         return compact('result');
     }
 
     /**
-     * @package upload
      * @author  Payam Yasaie <payam@yasaie.ir>
+     * @since   2019-08-22
      *
-     * @param $item
-     * @param $requests
-     * @param $collection
+     * @param               $item
+     * @param array|string  $requests
+     * @param string        $collection
      */
-    static public function upload($item, $requests, $collection)
+    static public function upload($item, $requests, string $collection)
     {
         $requests = is_array($requests)
             ? $requests
@@ -255,4 +206,68 @@ class Crud
             }
         }
     }
+
+    /**
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     * @param $items
+     * @param $heads
+     * @param $sort_by
+     * @param $perPage
+     * @param array $load
+     *
+     * @return Factory|View
+     *@package index
+     */
+    static public function index($items, $heads, $sort_by, $perPage, $load = [])
+    {
+        if (!is_object($items)) {
+            $items = $items::get();
+        }
+
+        if ($load) {
+            $items = $items->load($load);
+        }
+
+        # get all requests
+        $request = request();
+        # Url query requested
+        $query = [
+            'search' => $request->search,
+            'sort' => $request->sort,
+        ];
+
+        # Custom fields
+        $search = $request->search;
+        $column = $request->column;
+        $sort = $request->sort ?: $sort_by;
+        $sort = str_replace('_desc', '', $sort, $desc);
+
+        # flatten and Search in model if search requested
+        $items = Y::flattenItems($items, $heads, $search, $column);
+        # Sort and desc/asc items
+        $items = $items->sortBy($sort, SORT_NATURAL, $desc);
+        # Paginate items
+        $pages = Helper::paginate($items, $request->page, $perPage);
+
+        return view('admin.crud.table')
+            ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
+    }
+
+    /**
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     * @param $inputs
+     * @param null $multilang
+     * @param null $form_action
+     * @param null $form_id
+     *
+     * @return Factory|View
+     *@package create
+     */
+    static public function create($inputs, $multilang = null, $form_action = null, $form_id = null)
+    {
+        return self::form($inputs, $multilang, $form_action, $form_id);
+    }
+
 }

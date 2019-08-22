@@ -10,6 +10,9 @@
         }
     ],
     "require": {
+        "spatie/laravel-medialibrary": "^7.0.0",
+        "spatie/laravel-permission": "^2.37",
+        "yasaie/php-support": "dev-master",
         "yasaie/laravel-helper": "dev-master",
         "yasaie/laravel-paginate": "dev-master"
     },
@@ -26,6 +29,10 @@
         }
     },
     "repositories": [
+        {
+            "type": "github",
+            "url": "git@github.com:Yasaie/php-support.git"
+        },
         {
             "type": "github",
             "url": "git@github.com:Yasaie/laravel-helper.git"

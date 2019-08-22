@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('Cruder::layout')
 
 @section('title', $title)
 
@@ -40,7 +40,11 @@
                                     if (isset($head['link'])) :
                                         $searching['column'] = $head['link']['column'];
                                         $searching['search'] = $item->{$head['link']['search']};
-                                        $text = "<a href='" . route($head['link']['route']) . "?" . http_build_query($searching) . "'>{$text}</a>";
+                                        $text = "<a href='"
+                                            . route($head['link']['route'])
+                                            . "?"
+                                            . http_build_query($searching)
+                                            . "'>{$text}</a>";
                                     endif;
                                     if (isset($head['string'])) :
                                         $text = nl2br($text);
@@ -68,16 +72,5 @@
 @endsection
 
 @section('script')
-    <script>
-        const iziToastConst = {
-            position: '{{ isRTL() ? 'bottomLeft' : 'bottomRight' }}',
-            timeout: 10000,
-            transitionIn: 'flipInX',
-            transitionOut: 'flipOutX',
-            maxWidth: '40vw',
-            rtl: {{isRTL()}}
-        };
-    </script>
-    <script type="text/javascript" src="{{asset('vendor/cruder/plugins/iziToast/js/iziToast.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/cruder/js/delete.min.js')}}"></script>
 @endsection

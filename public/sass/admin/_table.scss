@@ -1,0 +1,20 @@
+/*
+ * Component: Table
+ * ----------------
+ */
+.table.no-border,
+.table.no-border td,
+.table.no-border th {
+  border: 0;
+}
+
+.table.text-center, .table.text-center td, .table.text-center th {
+  text-align: center;
+}
+
+.table-valign-middle thead > tr > th,
+.table-valign-middle thead > tr > td,
+.table-valign-middle tbody > tr > th,
+.table-valign-middle tbody > tr > td {
+  vertical-align: middle;
+}

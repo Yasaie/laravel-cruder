@@ -1,0 +1,38 @@
+/*
+ * Component: alert
+ * ----------------
+ */
+.alert .icon {
+  margin-right: 10px;
+}
+
+.alert .close, .alert .mailbox-attachment-close {
+  color: #000;
+  opacity: .2;
+}
+
+.alert .close:hover, .alert .mailbox-attachment-close:hover {
+  opacity: .5;
+}
+
+.alert a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.alert-success {
+  border-color: #23923d;
+}
+
+.alert-danger,
+.alert-error {
+  border-color: #d32535;
+}
+
+.alert-warning {
+  border-color: #edb100;
+}
+
+.alert-info {
+  border-color: #148ea1;
+}

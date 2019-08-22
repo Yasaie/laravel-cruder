@@ -1,0 +1,128 @@
+/*
+ * Core: General Layout Style
+ * -------------------------
+ */
+html,
+body,
+.wrapper {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.layout-boxed .wrapper {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.layout-boxed .wrapper, .layout-boxed .wrapper:before {
+  margin: 0 auto;
+  max-width: 1250px;
+}
+
+@media (min-width: 768px) {
+  .content-wrapper,
+  .main-footer,
+  .main-header {
+    transition: margin-left 0.3s ease-in-out;
+    margin-left: 250px;
+    z-index: 3000;
+  }
+}
+
+@media screen and (min-width: 768px) and (prefers-reduced-motion: reduce) {
+  .content-wrapper,
+  .main-footer,
+  .main-header {
+    transition: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar-collapse .content-wrapper, .sidebar-collapse
+  .main-footer, .sidebar-collapse
+  .main-header {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .content-wrapper, .content-wrapper:before,
+  .main-footer,
+  .main-footer:before,
+  .main-header,
+  .main-header:before {
+    margin-left: 0;
+  }
+}
+
+.content-wrapper {
+  background: #f4f6f9;
+}
+
+.content-wrapper > .content {
+  padding: 0 0.5rem;
+}
+
+.main-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.main-sidebar, .main-sidebar:before {
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+  width: 250px;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .main-sidebar, .main-sidebar:before {
+    transition: none;
+  }
+}
+
+.sidebar-collapse .main-sidebar, .sidebar-collapse .main-sidebar:before {
+  margin-left: -250px;
+}
+
+@media (max-width: 991.98px) {
+  .main-sidebar, .main-sidebar:before {
+    box-shadow: none !important;
+    margin-left: -250px;
+  }
+  .sidebar-open .main-sidebar, .sidebar-open .main-sidebar:before {
+    margin-left: 0;
+  }
+}
+
+.main-footer {
+  padding: 15px;
+  color: #555;
+  border-top: 1px solid #dee2e6;
+  background: #ffffff;
+}
+
+.content-header {
+  padding: 15px 0.5rem;
+}
+
+.content-header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.content-header .breadcrumb {
+  margin-bottom: 0;
+  padding: 0;
+  background: transparent;
+  line-height: 1.8rem;
+}
+
+.hold-transition .content-wrapper,
+.hold-transition .main-header,
+.hold-transition .main-footer {
+  transition: none !important;
+}

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('Cruder::layout')
 
 @section('title', $title)
 
@@ -151,16 +151,5 @@
 @endsection
 
 @section('script')
-    <script>
-        const iziToastConst = {
-            position: '{{ isRTL() ? 'bottomLeft' : 'bottomRight' }}',
-            timeout: 10000,
-            transitionIn: 'flipInX',
-            transitionOut: 'flipOutX',
-            maxWidth: '40vw',
-            rtl: {{isRTL()}}
-        };
-    </script>
-    <script type="text/javascript" src="{{asset('vendor/cruder/plugins/iziToast/js/iziToast.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/cruder/js/delete.min.js')}}"></script>
 @endsection

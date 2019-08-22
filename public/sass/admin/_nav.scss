@@ -1,0 +1,11 @@
+/*
+ * Component: Nav
+ * --------------
+ */
+.nav-pills .nav-link {
+  color: #6c757d;
+}
+
+.nav-pills .nav-link:not(.active):hover {
+  color: #007bff;
+}

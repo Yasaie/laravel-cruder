@@ -1,0 +1,50 @@
+/*
+ * Component: Progress Bar
+ * -----------------------
+ */
+.progress {
+  box-shadow: none;
+  border-radius: 1px;
+}
+
+.progress-sm {
+  height: 10px;
+}
+
+.progress-xs {
+  height: 7px;
+}
+
+.progress-xxs {
+  height: 3px;
+}
+
+.progress.vertical {
+  position: relative;
+  width: 30px;
+  height: 200px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.progress.vertical > .progress-bar {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.progress.vertical.sm, .progress.vertical.progress-sm {
+  width: 20px;
+}
+
+.progress.vertical.xs, .progress.vertical.progress-xs {
+  width: 10px;
+}
+
+.progress.vertical.xxs, .progress.vertical.progress-xxs {
+  width: 3px;
+}
+
+.table tr > td .progress {
+  margin: 0;
+}
