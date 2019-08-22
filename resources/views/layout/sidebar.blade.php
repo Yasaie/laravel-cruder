@@ -7,7 +7,7 @@
 
     <div class="sidebar">
 
-        <div class="user-panel px-2 pt-1 mt-2 d-flex" style="background: #41484f;">
+        <div class="user-panel px-2 pt-2 mt-2 d-flex" style="background: #41484f;">
             <div class="image">
                 <svg class="img-circle" height="40" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <path d="M512 76.893274c240.301971 0 435.106726 194.803731 435.106726 435.106726S752.301971 947.106726 512 947.106726c-240.302995 0-435.106726-194.803731-435.106726-435.106726s194.803731-435.106726 435.106726-435.106726z" fill="#17a2b8"/>
