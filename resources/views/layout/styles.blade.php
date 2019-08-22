@@ -1,3 +1,5 @@
+<script src="{{asset('vendor/cruder/plugins/jquery/jquery.min.js')}}"></script>
+
 <!-- Styles -->
 <link rel="stylesheet" href="{{asset('vendor/cruder/css/main.css')}}">
 
@@ -7,5 +9,3 @@
 @endif
 <!-- /Styles -->
 @yield('style')
-
-<script src="{{asset('vendor/cruder/plugins/jquery/jquery.min.js')}}"></script>

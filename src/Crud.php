@@ -142,13 +142,13 @@ class Crud
      * @since   2019-08-22
      *
      * @param array  $inputs
-     * @param array  $locals
+     * @param array  $locales
      * @param string $form_action
      * @param int    $form_id
      *
      * @return Factory|View
      */
-    static public function form(array $inputs, array $locals = [], string $form_action = '', int $form_id = 0)
+    static public function form(array $inputs, array $locales = [], string $form_action = '', int $form_id = 0)
     {
         if (!$form_action) {
             $form_action = \Request::route()->parameters
@@ -158,7 +158,7 @@ class Crud
         $form_id = $form_id ?: current(\Request::route()->parameters);
 
         return view('Cruder::page.form')
-            ->with(compact('inputs', 'locals', 'form_action', 'form_id'));
+            ->with(compact('inputs', 'locales', 'form_action', 'form_id'));
     }
 
     /**
