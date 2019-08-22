@@ -11,9 +11,9 @@
 
                     <form class="row" id="all-table">
 
-                        <div class="col-md-3 mb-2 mb-sm-0">
+                        <div class="col-md-3 col-sm-6 mb-2 mb-md-0">
                             <div class="row">
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-md-6">
                                     @can("$route.create")
                                         <a href="{{route("$route.create")}}" class="btn btn-success btn-sm w-100">
                                             <i class="fa fa-file"></i> @lang('Cruder::crud.add')
@@ -23,7 +23,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2 col-sm-3 mb-2 mb-sm-0">
+                        <div class="col-md-2 col-sm-6 mb-2 mb-md-0">
                             <div class="badge badge-dark py-2 w-100">
                                 <span class="font-weight-normal">@lang("Cruder::crud.results") : </span>
                                 <span class="text-warning position-relative"
@@ -38,7 +38,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2 d-flex mb-2 mb-sm-0">
+                        <div class="col-md-2 d-flex mb-2 mb-md-0">
                             <div class="input-group-sm d-flex w-100">
                                 <label for="rows" class="w-50 m-2 small">سطرها:</label>
                                 <select name="rows" id="rows" class="form-control" onchange="document.getElementById('all-table').submit()">
@@ -52,12 +52,12 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-5">
+                        <div class="col-md-5">
                             @if(isset($searchable) and $searchable->count())
                                 <div class="input-group input-group-sm w-100">
 
                                     @if($searchable->count() > 1)
-                                        <select name="column" class="form-control"
+                                        <select name="column" class="form-control mx-0 mx-sm-2"
                                                 style="max-width: 130px;">
                                             <option value="">@lang('Cruder::crud.all')</option>
                                             @foreach($searchable as $key => $srb)
