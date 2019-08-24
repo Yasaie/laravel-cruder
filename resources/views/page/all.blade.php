@@ -119,7 +119,7 @@
                                 @endif
                             @endforeach
                             @canany(["$route.show", "$route.edit", "$route.destroy"])
-                                <th class="text-center">@lang('Cruder::crud.actions')</th>
+                                <th class="text-center" style="min-width: 90px;">@lang('Cruder::crud.actions')</th>
                             @endcanany
                         </tr>
                         </thead>
