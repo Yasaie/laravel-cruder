@@ -108,6 +108,9 @@
             language: '{{app()->getLocale()}}',
             minimumResultsForSearch: 5,
         };
+        $(document).ready(function () {
+            $('.select2').select2(select2_array);
+        });
     </script>
 @endsection
 
@@ -117,9 +120,7 @@
     <script src="{{asset('vendor/cruder/plugins/dropzone/i18n/fa.js')}}"></script>
     <script>
         Dropzone.autoDiscover = false;
-
         $(document).ready(function () {
-            $('.select2').select2(select2_array);
             tinymce.init({
                 selector: 'textarea.text-html',
                 height: 300,

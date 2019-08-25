@@ -4,7 +4,7 @@
 
 <script>
     $(document).ready(function () {
-        $("#{{$name}}").select2(Object.assign({}, select2_array, {
+        $("select#{{$name}}").select2(Object.assign({}, select2_array, {
             minimumResultsForSearch: 0,
             ajax: {
                 url: "{{ $options['url'] }}",
