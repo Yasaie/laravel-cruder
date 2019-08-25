@@ -1,10 +1,13 @@
 <select name="{{$name}}" id="{{$name}}"
         class="form-control select2 w-100">
+    @if(isset($value))
+        <option value="{{ $value->id }}" selected="selected">{{ $value->text }}</option>
+    @endif
 </select>
 
 <script>
     $(document).ready(function () {
-        $("select#{{$name}}").select2(Object.assign({}, select2_array, {
+        $("#{{$name}}").select2(Object.assign({}, select2_array, {
             minimumResultsForSearch: 0,
             ajax: {
                 url: "{{ $options['url'] }}",
