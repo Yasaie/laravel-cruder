@@ -1,5 +1,6 @@
 <select name="{{$name}}" id="{{$name}}"
-        class="form-control select2 w-100">
+        class="form-control select2"
+        style="width: 100%">
     @if(isset($value))
         <option value="{{ $value->id }}" selected="selected">{{ $value->text }}</option>
     @endif
