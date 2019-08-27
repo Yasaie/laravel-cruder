@@ -211,53 +211,6 @@ class Crud
     /**
      * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param $items
-     * @param $heads
-     * @param $sort_by
-     * @param $perPage
-     * @param array $load
-     *
-     * @return Factory|View
-     *@package index
-     */
-    static public function index($items, $heads, $sort_by, $perPage, $load = [])
-    {
-        if (!is_object($items)) {
-            $items = $items::get();
-        }
-
-        if ($load) {
-            $items = $items->load($load);
-        }
-
-        # get all requests
-        $request = request();
-        # Url query requested
-        $query = [
-            'search' => $request->search,
-            'sort' => $request->sort,
-        ];
-
-        # Custom fields
-        $search = $request->search;
-        $column = $request->column;
-        $sort = $request->sort ?: $sort_by;
-        $sort = str_replace('_desc', '', $sort, $desc);
-
-        # flatten and Search in model if search requested
-        $items = Y::flattenItems($items, $heads, $search, $column);
-        # Sort and desc/asc items
-        $items = $items->sortBy($sort, SORT_NATURAL, $desc);
-        # Paginate items
-        $pages = Helper::paginate($items, $request->page, $perPage);
-
-        return view('admin.crud.table')
-            ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
-    }
-
-    /**
-     * @author  Payam Yasaie <payam@yasaie.ir>
-     *
      * @param $inputs
      * @param null $multilang
      * @param null $form_action
