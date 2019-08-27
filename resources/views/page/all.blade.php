@@ -95,7 +95,7 @@
 
             <div class="card">
                 <div class="card-body table-responsive p-0">
-                    <table class="table table-bordered table-striped table-hover dataTable">
+                    <table class="table table-bordered table-striped table-hover dataTable nowrap">
                         <thead>
                         <tr>
                             @foreach($heads as $head)
