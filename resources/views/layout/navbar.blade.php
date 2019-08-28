@@ -10,7 +10,7 @@
     </ul>
 
     <ul class="navbar-nav {{isRTL() ? 'mr-auto' : 'ml-auto'}}">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown d-none">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="fa fa-bell-o"></i>
                 <span class="badge badge-warning navbar-badge">15</span>
