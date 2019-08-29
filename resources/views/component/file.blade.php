@@ -1,6 +1,7 @@
-<div action="{{route('admin.media.upload')}}" class="dropzone" id="{{$name}}"></div><input type="hidden"
-                                                                                           name="{{$name}}"
-                                                                                           id="{{$name}}">
+<div action="{{route('admin.media.upload')}}" class="dropzone" id="{{$name}}"></div>
+<input type="hidden"
+       name="{{$name}}"
+       id="{{$name}}">
 <script>
     var {{$name}}Dropzone = null;
     $(document).ready(function () {

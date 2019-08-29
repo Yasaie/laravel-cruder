@@ -4,12 +4,12 @@
     <option></option>
     @foreach($options['all'] as $c)
         @php($id = isset($options['id'])
-            ? Y::dotObject($c, $options['id'])
-            : Y::dotObject($c, 'id')
+            ? dot($c, $options['id'])
+            : dot($c, 'id')
         )
         @php($title = isset($options['name'])
-            ? Y::dotObject($c, $options['name'])
-            : Y::dotObject($c, 'title')
+            ? dot($c, $options['name'])
+            : dot($c, 'title')
         )
     <option value="{{$id}}"
         {{ (isset($value) and $value == $id) ? 'selected' : '' }}>
