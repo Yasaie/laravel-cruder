@@ -1,13 +1,14 @@
 <?php
 /**
- * @package     laravel-cruder
  * @author      Payam Yasaie <payam@yasaie.ir>
+ * @package     laravel-cruder
  * @copyright   2019-07-13
  */
 
 namespace Yasaie\Cruder;
 
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Yasaie\Support\Yalp;
 
@@ -99,8 +100,8 @@ class Crud
      * @author  Payam Yasaie <payam@yasaie.ir>
      * @since   2019-08-21
      *
-     * @param int|\Eloquent  $item
-     * @param array          $heads
+     * @param int|\Eloquent $item
+     * @param array         $heads
      *      [
      *          [
      *              'name' => 'name',        # required
@@ -113,8 +114,8 @@ class Crud
      *              'append' => 'string'     # default is ''
      *          ]
      *      ]
-     * @param string         $model
-     * @param array          $load
+     * @param string        $model
+     * @param array         $load
      *
      * @return Factory|View
      */
@@ -149,7 +150,7 @@ class Crud
      *
      * @return Factory|View
      */
-    static public function form(array $inputs, array $locales = [], string $form_action = '', int $form_id = 0)
+    static public function form(array $rows, string $form_action = '', int $form_id = 0)
     {
         if (!$form_action) {
             $form_action = \Request::route()->parameters
@@ -159,7 +160,7 @@ class Crud
         $form_id = $form_id ?: current(\Request::route()->parameters);
 
         return view('Cruder::page.form')
-            ->with(compact('inputs', 'locales', 'form_action', 'form_id'));
+            ->with(compact('rows', 'form_action', 'form_id'));
     }
 
     /**
@@ -210,18 +211,63 @@ class Crud
 
     /**
      * @author  Payam Yasaie <payam@yasaie.ir>
+     * @since   2019-09-01
      *
-     * @param $inputs
-     * @param null $multilang
+     * @param array $locales
+     *
+     * @return array
+     */
+    static public function locale(array $locales)
+    {
+        $tabs = Yalp::flatten(config('global.langs'), [
+            [
+                'name' => 'id',
+                'get' => 'getId()'
+            ],
+            [
+                'name' => 'name',
+                'get' => 'getNativeName()'
+            ]
+        ]);
+        foreach ($tabs as $key => $tab) {
+            foreach ($locales as $locale) {
+
+                if (isset($locale['value'])) {
+                    $get = isset($locale['get']) ? $locale['get'] : $locale['name'];
+                    $locale['value'] = dot($locale['value'], 'getTranslate($)', [$get, $tab->id]);
+                }
+
+                $body[$key][] = $locale;
+            }
+        }
+
+        return compact('tabs', 'body');
+    }
+
+    /**
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     * @param      $inputs
+     * @param null $locales
      * @param null $form_action
      * @param null $form_id
      *
      * @return Factory|View
-     *@package create
+     * @package create
      */
-    static public function create($inputs, $multilang = null, $form_action = null, $form_id = null)
+    static public function create($inputs, $locales = null, $form_action = null, $form_id = null)
     {
-        return self::form($inputs, $multilang ?: [], $form_action ?: '', $form_id ?: 0);
+        $rows = [];
+
+        if ($inputs) {
+            $rows[] = $inputs;
+        }
+
+        if ($locales) {
+            $rows[] = static::locale($locales);
+        }
+
+        return static::form($rows, $form_action ?: '', $form_id ?: 0);
     }
 
 }

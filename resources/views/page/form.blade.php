@@ -10,79 +10,12 @@
             @method('PUT')
         @endif
 
-        @if($inputs)
-            <div class="row">
-                <div class="col-12">
-
-                    <div class="card">
-
-                        <div class="card-body">
-                            @foreach($inputs as $input)
-                                @if(old($input['name']) !== null)
-                                    @php($input['value'] = old($input['name']))
-                                @endif
-                                <div class="form-group">
-                                    <label for="{{$input['name']}}">@lang('model.'. $input['name'])</label>
-                                    @include('Cruder::component.' . $input['type'], $input)
-                                </div>
-                            @endforeach
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        @endif
-
-        @if(isset($locales) and $locales)
-            <div class="row">
-                <div class="col-12">
-
-                    <div class="card">
-
-                        <div class="card-header" style="border-bottom: none">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                @php($langs = config('global.langs'))
-                                @foreach($langs as $lang)
-                                    <li class="nav-item">
-                                        <a class="nav-link {{current($langs) == $lang ? 'active' : ''}}"
-                                           data-toggle="tab"
-                                           href="#{{$lang->getId()}}-tab"
-                                           aria-selected="true">{{$lang->getNativeName()}}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <div class="card-body">
-                            <div class="tab-content">
-                                @foreach($langs as $lang)
-                                    <div class="tab-pane fade {{current($langs) == $lang ? 'show active' : ''}}"
-                                         id="{{$lang->getId()}}-tab">
-                                        @foreach($locales as $input)
-                                            <div class="form-group">
-                                                @if(isset($input['name']) and $input['name'])
-                                                <label for="{{$input['name']}}[{{$lang->getId()}}]">@lang('model.'. $input['name'])</label>
-                                                @if(isset($input['value']))
-                                                    @php($input['get'] = isset($input['get']) ? $input['get'] : $input['name'])
-                                                    @php($input['value'] = $input['value']->getTranslate($input['get'], $lang->getId()))
-                                                @endif
-                                                @if(isset(old($input['name'])[$lang->getId()]))
-                                                    @php($input['value'] = old($input['name'])[$lang->getId()])
-                                                @endif
-                                                @php($input['name'] = $input['name'] . '[' . $lang->getId() . ']')
-                                                @endif
-                                                @include('Cruder::component.' . $input['type'], $input)
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        @endif
+        @foreach($rows as $row)
+            @include('Cruder::include.form-group', [
+                'tabs' => isset($row['tabs']) ? $row['tabs'] : [],
+                'body' => isset($row['body']) ? $row['body'] : $row
+            ])
+        @endforeach
 
         <div class="row">
             <div class="col-12">
