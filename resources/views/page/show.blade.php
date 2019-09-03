@@ -11,13 +11,13 @@
                 <div class="card-body">
                     <div class="form-group float-left">
                         @can("$route.edit")
-                            <a href="{{route("$route.edit", $item->id)}}" class="btn btn-success btn-sm">
+                            <a href="{{route("$route.edit", $item->id)}}" class="btn btn-success btn-sm mx-1">
                                 <i class="fa fa-pencil"></i>
                                 @lang('Cruder::crud.edit')
                             </a>
                         @endcan
                         @can("$route.destroy")
-                            <button onclick="deleteItem({{$item->id}})" class="btn btn-danger btn-sm">
+                            <button onclick="deleteItem({{$item->id}})" class="btn btn-danger btn-sm mx-1">
                                 <i class="fa fa-trash"></i>
                                 @lang('Cruder::crud.delete')
                             </button>
