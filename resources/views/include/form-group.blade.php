@@ -31,7 +31,9 @@
 
                                 @foreach($data as $input)
                                     <div class="form-group">
-                                        <label for="{{$input['name']}}[{{ $tab }}]">@lang('model.'. $input['name'])</label>
+                                        @php($locale = isset($input['locale']['name']) ? $input['locale']['name'] : 'model.'. $input['name'])
+                                        @php($attributes = isset($input['locale']['attributes']) ? $input['locale']['attributes'] : [])
+                                        <label for="{{$input['name']}}[{{ $tab }}]">@lang($locale, $attributes)</label>
                                         @if(isset(old($input['name'])[$tab]))
                                             @php($input['value'] = old($input['name'])[$tab])
                                         @endif
@@ -49,7 +51,9 @@
                 <div class="card-body">
                     @foreach($body as $input)
                         <div class="form-group">
-                            <label for="{{ $input['name'] }}">@lang('model.'. $input['name'])</label>
+                            @php($locale = isset($input['locale']['name']) ? $input['locale']['name'] : 'model.'. $input['name'])
+                            @php($attributes = isset($input['locale']['attributes']) ? $input['locale']['attributes'] : [])
+                            <label for="{{ $input['name'] }}">@lang($locale, $attributes)</label>
                             @if(old($input['name']))
                                 @php($input['value'] = old($input['name']))
                             @endif

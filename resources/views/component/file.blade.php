@@ -1,12 +1,13 @@
-<div action="{{route('admin.media.upload')}}" class="dropzone" id="{{$name}}"></div>
+@php($dropzone = str_replace(['[', ']', '.'], '_', $name) . 'dropzone')
+<div action="{{route('admin.media.upload')}}" class="dropzone" id="{{ $dropzone }}"></div>
 <input type="hidden"
        name="{{$name}}"
-       id="{{$name}}">
+       id="{{ $dropzone }}">
 <script>
-    var {{$name}}Dropzone = null;
+    var {{ $dropzone }} = null;
     $(document).ready(function () {
         var _token = $('[name=csrf-token]').attr('content');
-        {{$name}}Dropzone = new Dropzone('div#{{$name}}', {
+        {{ $dropzone }} = new Dropzone('div#{{$dropzone}}', {
             addRemoveLinks: true,
             parallelUploads: 10,
             acceptedFiles: '.jpg, .png, .gif',
@@ -49,20 +50,20 @@
         var existingFiles = {!! $dropzone_data !!};
 
         for (i = 0; i < existingFiles.length; i++) {
-            {{$name}}Dropzone.emit("addedfile", existingFiles[i]);
-            {{$name}}Dropzone.emit("thumbnail", existingFiles[i], existingFiles[i].thumb);
-            {{$name}}Dropzone.emit("complete", existingFiles[i]);
-            {{$name}}Dropzone.files[i] = {id: existingFiles[i].id}
+            {{ $dropzone }}.emit("addedfile", existingFiles[i]);
+            {{ $dropzone }}.emit("thumbnail", existingFiles[i], existingFiles[i].thumb);
+            {{ $dropzone }}.emit("complete", existingFiles[i]);
+            {{ $dropzone }}.files[i] = {id: existingFiles[i].id}
         }
         @endif
     });
     $('form#create').on('submit', function (event) {
         event.preventDefault(); //this will prevent the default submit
         var array = [];
-        Object.values({{$name}}Dropzone.files).forEach(function (e) {
+        Object.values({{ $dropzone }}.files).forEach(function (e) {
             array.push(e.id)
         });
-        $("input#{{$name}}").val(array);
+        $("input#{{$dropzone}}").val(array);
         $(this).unbind('submit').submit(); // continue the submit unbind preventDefault
     })
 </script>
