@@ -30,7 +30,7 @@
                                       style="font-size: 1.4em; top: 1px"> {{$paginate->total()}}</span>
 
                                 @if($paginate->total())
-                                    <span class="fa fa-hashtag text-warning mx-1"></span>
+                                    <span class="fa fa-hashtag text-warning"></span>
                                     <span style="font-size: 1.1em">{{$paginate->firstItem()}}</span>
                                     <span class="mx-1">@lang('Cruder::crud.to')</span>
                                     <span style="font-size: 1.1em">{{$paginate->lastItem()}}</span>
@@ -153,15 +153,15 @@
                                     <td class="text-center">
                                         @can("$route.show")
                                             <a href="{{route("$route.show", $item->id)}}"
-                                               class="btn btn-info btn-sm fa fa-eye mx-1"></a>
+                                               class="btn btn-info btn-sm fa fa-eye"></a>
                                         @endcan
                                         @can("$route.edit")
                                             <a href="{{route("$route.edit", $item->id)}}"
-                                               class="btn btn-success btn-sm fa fa-pencil mx-1"></a>
+                                               class="btn btn-success btn-sm fa fa-pencil"></a>
                                         @endcan
                                         @can("$route.destroy")
                                             <button onclick="deleteItem({{$item->id}})"
-                                                    class="btn btn-danger btn-sm fa fa-trash mx-1"></button>
+                                                    class="btn btn-danger btn-sm fa fa-trash"></button>
                                         @endcan
                                     </td>
                                 @endcanany
