@@ -1,5 +1,5 @@
 @php($dropzone = str_replace(['[', ']', '.'], '_', $name) . 'dropzone')
-<div action="{{route('admin.media.upload')}}" class="dropzone" id="{{ $dropzone }}"></div>
+<div action="{{route('crud.media.upload')}}" class="dropzone" id="{{ $dropzone }}"></div>
 <input type="hidden"
        name="{{$name}}"
        id="{{ $dropzone }}">
@@ -24,7 +24,7 @@
                 file.previewElement.remove();
                 $.ajax({
                     type: 'POST',
-                    url: '{{route('admin.media.unlink')}}/' + file.id,
+                    url: '{{route('crud.media.unlink')}}/' + file.id,
                     data: {
                         _method: 'DELETE',
                         _token: _token

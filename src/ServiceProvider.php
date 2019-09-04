@@ -2,6 +2,9 @@
 
 namespace Yasaie\Cruder;
 
+use Illuminate\Auth\Middleware\Authenticate;
+use Route;
+
 /**
  * Class    ServiceProvider
  *
@@ -29,6 +32,20 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
+
+        $router = $this->app['router'];
+
+        $router->name('crud.media.')
+            ->prefix('crud')
+            ->namespace('Yasaie\Cruder')
+            ->middleware(['web', 'auth'])
+            ->group(function () {
+                Route::post('media/upload', 'MediaController@upload')
+                    ->name('upload');
+                Route::delete('media/unlink/{id?}', 'MediaController@unlink')
+                    ->name('unlink');
+            });
+
         # Loads
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'Cruder');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'Cruder');
