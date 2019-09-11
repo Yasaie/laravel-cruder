@@ -5,7 +5,7 @@
 .main-sidebar {
   z-index: 1100;
   height: 100vh;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -13,8 +13,12 @@
   padding-top: 0;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  overflow-y: auto;
-  height: calc(100vh - 3.5rem);;
+  height: calc(100vh - 3.2rem);
+  overflow: hidden;
+
+  &:hover {
+    overflow-y: auto;
+  }
 }
 
 .user-panel {
