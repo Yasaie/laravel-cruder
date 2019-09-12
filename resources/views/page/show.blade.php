@@ -34,6 +34,9 @@
                             @php
                                 $text = $item->{$head['name']};
                                 if ($text != '') :
+                                    if(isset($head['options']['translate']) and $head['options']['translate']):
+                                        $text = __('model.' . $text);
+                                    endif;
                                     if (isset($head['append'])) :
                                         $text .= $head['append'];
                                     endif;
@@ -45,9 +48,6 @@
                                             . "?"
                                             . http_build_query($searching)
                                             . "'>{$text}</a>";
-                                    endif;
-                                    if (isset($head['string'])) :
-                                        $text = nl2br($text);
                                     endif;
                                 else:
                                     $text = '-';
