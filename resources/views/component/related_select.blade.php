@@ -4,6 +4,8 @@
     <option></option>
 </select>
 
+@section('script')
+    @parent
 <script>
     var select_{{$name}} = $('select#{{$name}}');
     var default_{{$name}} = {{isset($value) ? $value : 0}};
@@ -40,3 +42,4 @@
         load_{{$name}}();
     }
 </script>
+@endsection

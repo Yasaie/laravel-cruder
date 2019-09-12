@@ -6,6 +6,8 @@
     @endif
 </select>
 
+@section('script')
+@parent
 <script>
     $(document).ready(function () {
         $("#{{$name}}").select2(Object.assign({}, select2_array, {
@@ -25,3 +27,4 @@
         }));
     });
 </script>
+@endsection

@@ -1,6 +1,6 @@
 <script type="text/javascript" src="{{asset('vendor/cruder/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('vendor/cruder/plugins/iziToast/js/iziToast.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('vendor/cruder/plugins/inputmask/jquery.inputmask.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('vendor/cruder/plugins/inputmask/jquery.inputmask.min.js')}}" async defer></script>
 @yield('script')
 <script type="text/javascript" src="{{asset('vendor/cruder/js/adminlte.min.js')}}" defer async></script>
 

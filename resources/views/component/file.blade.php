@@ -3,6 +3,8 @@
 <input type="hidden"
        name="{{$name}}"
        id="{{ $dropzone }}">
+@section('script')
+    @parent
 <script>
     var {{ $dropzone }} = null;
     $(document).ready(function () {
@@ -67,3 +69,4 @@
         $(this).unbind('submit').submit(); // continue the submit unbind preventDefault
     })
 </script>
+@endsection
