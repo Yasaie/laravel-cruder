@@ -9,7 +9,7 @@
 
         <div class="user-panel px-2 pt-2 mt-2 d-flex" style="background: #41484f;">
             <div class="image">
-                <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(trim(Auth::user()->email))) }}?d=retro" class="img-circle" >
+                <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(trim(Auth::user()->email))) }}?d=mp" class="img-circle" >
             </div>
             <div class="info">
                 <a href="{{route('admin.user.user.show', Auth::id() ?: 0)}}"
