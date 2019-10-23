@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @if(isset($route) and $route)
+    @if(isset($route) and $route and Route::has("$route.index"))
         <meta name="route" content="{{ route("$route.index")}}">
     @endif
 
